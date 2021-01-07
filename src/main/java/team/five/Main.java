@@ -116,6 +116,41 @@ public class Main extends Application {
         btnBackToScene1.setLayoutX(50);
         btnBackToScene1.setLayoutY(700);
         btnBackToScene1.setPrefSize(60,40);
+        btnCity1.setStyle(
+                "-fx-background-radius: 5em; " +
+                        "-fx-min-width: 10px; " +
+                        "-fx-min-height: 10px; " +
+                        "-fx-max-width: 10px; " +
+                        "-fx-max-height: 10px;"
+        );
+        btnCity2.setStyle(
+                "-fx-background-radius: 5em; " +
+                        "-fx-min-width: 10px; " +
+                        "-fx-min-height: 10px; " +
+                        "-fx-max-width: 10px; " +
+                        "-fx-max-height: 10px;"
+        );
+        btnCity3.setStyle(
+                "-fx-background-radius: 5em; " +
+                        "-fx-min-width: 10px; " +
+                        "-fx-min-height: 10px; " +
+                        "-fx-max-width: 10px; " +
+                        "-fx-max-height: 10px;"
+        );
+        btnCity4.setStyle(
+                "-fx-background-radius: 5em; " +
+                        "-fx-min-width: 10px; " +
+                        "-fx-min-height: 10px; " +
+                        "-fx-max-width: 10px; " +
+                        "-fx-max-height: 10px;"
+        );
+        btnCity5.setStyle(
+                "-fx-background-radius: 5em; " +
+                        "-fx-min-width: 10px; " +
+                        "-fx-min-height: 10px; " +
+                        "-fx-max-width: 10px; " +
+                        "-fx-max-height: 10px;"
+        );
 
         /**
          * The stage (first view) is set and shown
@@ -139,11 +174,12 @@ public class Main extends Application {
                 case "Austria":
                     System.out.println("Austria has been selected.");
                     countryImage.setImage(austria);
-                    countryImage.setFitHeight(530);
-                    countryImage.setFitWidth(800);
-                    countryImage.setX(100);
+                    countryImage.setFitHeight(540);
+                    countryImage.setFitWidth(850);
+                    countryImage.setX(75);
                     countryImage.setY(100);
                     btnCity1.setText("Wien");
+                    btnCity1.setLayoutY(300);
                     break;
                 case "Czech Republic":
                     System.out.println("Czech Republic has been selected.");
@@ -178,4 +214,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+
 }
