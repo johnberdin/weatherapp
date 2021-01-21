@@ -1,0 +1,86 @@
+.root{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #403f44, #403f44);
+    -fx-border-radius: 20;
+    -fx-border-width: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: #403f44;
+}
+
+#btnBackToScene1{
+    -fx-background-radius: 10em;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-background-color: #403f44;
+    -fx-background-position: center;
+    -fx-background-size: 28px;
+    -fx-background-image: url('Exit.png');
+    -fx-background-repeat: no-repeat;
+}
+
+#btnBackToScene1:hover{
+    -fx-background-color: #ffa405;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+}
+
+.cityButtons{
+    -fx-background-radius: 5em;
+    -fx-min-width: 10px;
+    -fx-min-height: 10px;
+    -fx-max-width: 25px;
+    -fx-max-height: 25px;
+    -fx-content-display: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: transparent;
+}
+
+/*noinspection DuplicatedCode*/
+#btnCloseScene2{
+    -fx-background-radius: 10em;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    -fx-background-color: #403f44;
+    -fx-background-position: center;
+    -fx-background-size: 16px;
+    -fx-background-image: url('Close.png');
+    -fx-background-repeat: no-repeat;
+}
+
+#btnCloseScene2:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+    -fx-background-color: #ba1919;
+}
+
+/*noinspection DuplicatedCode*/
+#btnMinimizeScene2{
+    -fx-background-radius: 10em;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    -fx-background-color: #403f44;
+    -fx-background-position: center;
+    -fx-background-size: 16px;
+    -fx-background-image: url('Minimize.png');
+    -fx-background-repeat: no-repeat;
+}
+
+#btnMinimizeScene2:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+    -fx-background-color: #4c19ba;
+}
+
+#lblApptitle{
+    -fx-text-fill: WHITE;
+    -fx-font-family: "Champagne & Limousines";
+    -fx-font-size: 35px;
+}

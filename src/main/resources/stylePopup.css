@@ -1,0 +1,40 @@
+.root{
+    -fx-background-color: #403f44;
+    -fx-border-radius: 20;
+    -fx-border-width: 3;
+    -fx-background-radius: 20;
+    -fx-border-color: #2a2b2a;
+    -fx-fill: transparent;
+}
+
+#btnClosePopup{
+    -fx-background-radius: 10em;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    -fx-background-position: center;
+    -fx-background-size: 16px;
+    -fx-background-image: url('Close.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: #403f44;
+}
+
+#btnClosePopup:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+    -fx-background-color: #ba1919;
+}
+
+#lblChosenCity{
+    -fx-text-fill: WHITE;
+    -fx-font-family: "Champagne & Limousines";
+    -fx-font-size: 26px;
+}
+
+#lblInformation{
+    -fx-text-fill: WHITE;
+    -fx-font-family: "Champagne & Limousines";
+    -fx-font-size: 11px;
+}

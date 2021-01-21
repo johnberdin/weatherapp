@@ -9,12 +9,10 @@ public class City extends Main{
     float cityHumidity;
 
     public City (String city, float cityTemp, String cityWeather, float cityHumidity){
-
         this.city=city;
         this.cityTemp=cityTemp;
         this.cityWeather=cityWeather;
         this.cityHumidity=cityHumidity;
-
     }
 
 }
