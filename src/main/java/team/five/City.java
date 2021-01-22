@@ -22,13 +22,6 @@ public class City extends Main{
 
     private static List<String> TempList = new ArrayList<>();
     private static List<String> CityList = new ArrayList<>();
-    private int[] temp_array = new int[40];
-    private int[] feeltemp_array = new int[40];
-    private int[] humidity_array = new int[40];
-    private String[] weather_array = new String [40];
-    private String[] description_array = new String [40];
-    private float[] windspeed_array = new float [40];
-
 
 
     public City (String city) {
@@ -101,7 +94,6 @@ public class City extends Main{
         JSONObject mainWeather = new JSONObject(responseBody);
         JSONArray array = mainWeather.getJSONArray("list");
         jsonList = array;
-
 
         return null;
         }
