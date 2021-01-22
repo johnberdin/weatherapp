@@ -143,6 +143,8 @@ public class Main extends Application {
         lytLabelAndDropdown.setAlignment(Pos.CENTER);
         lytSelectAndConfirm.getChildren().addAll(new ImageView(new Image("AppIcon.png")), lytLabelAndDropdown, btnConfirmCountry);
         lytLabelAndDropdown.getChildren().addAll(lblSelectACountry, cbCountry);
+        City.ReadAPI("Linz");
+
 
         /**
          * scene2 is created
@@ -246,7 +248,7 @@ public class Main extends Application {
             lblChosenCity.setLayoutY(50);
             //This label will have to be filled with the full detailed information
             Label lblInformation = new Label("Weather: " + "Sunny"+System.lineSeparator()+
-                    "Description: " + "It is very warm"+System.lineSeparator());
+                    "Description: " + "sunny" +System.lineSeparator());
             lblInformation.setId("lblInformation");
             lblInformation.setLayoutX(20);
             lblInformation.setLayoutY(95);
@@ -314,6 +316,7 @@ public class Main extends Application {
                     arrLabelCitynames[4].setTranslateX(dblInnsbruckX-38);
                     arrLabelCitynames[4].setTranslateY(dblInnsbruckY+23);
                     //To display the borders for help "LABELNAME".setStyle("-fx-border-color: white;");
+
                     break;
                 case "Czech Republic":
                     System.out.println("Czech Republic has been selected.");
@@ -379,7 +382,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(); City a = new City("Wien");
     }
 
 
