@@ -19,15 +19,14 @@ public class City extends Main{
     private String description;
     private float windspeed;
     private static JSONArray jsonList;
-
-    private static List<String> TempList = new ArrayList<>();
-    private static List<String> CityList = new ArrayList<>();
-    private int[] temp_array = new int[40];
-    private int[] feeltemp_array = new int[40];
-    private int[] humidity_array = new int[40];
-    private String[] weather_array = new String [40];
-    private String[] description_array = new String [40];
-    private float[] windspeed_array = new float [40];
+    //Index 0 ist the most recent dateset, every next index is the data in +3 hours
+    private List<Integer> tempList = new ArrayList<>();
+    private List<String> tempfeelslikeList = new ArrayList<>();
+    private List<Integer> humidityList = new ArrayList<>();
+    private List<String> weathernameList = new ArrayList<>(); //Weathername: "Clouds", "Rain",....
+    private List<String> descriptionList = new ArrayList<>();//Weatherdescription: "dark clouds",...
+    private List<Float>  windspeedList = new ArrayList<>();
+    private List<String> dateList = new ArrayList<>();
 
 
 
@@ -35,55 +34,28 @@ public class City extends Main{
         //Methodenaufruf von ReadAPI mit übergebenem Städtenamen um JSON File zu erzeugen
         ReadAPI(city);
 
-      /*  this.weathername = jsonList.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("main");
-        System.out.println(this.weathername);
-
-        this.description = jsonList.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description");
-        System.out.println(this.description);
-
-        this.start_Date = jsonList.getJSONObject(0).getString("dt_txt");
-        System.out.println(this.start_Date);
-
-        this.windspeed = jsonList.getJSONObject(0).getJSONObject("wind").getFloat("speed");
-        System.out.println(this.windspeed);
-
-
-       */
-        for (int i = 1; i < jsonList.length(); i++) {
-
+        for (int i = 0; i < jsonList.length(); i++) {
             //Temporäre Liste löschen
-            TempList.clear();
             //Arraylist Stelle 1: Temperatur, Stelle 2: feels like, Stelle 3: Feuchtigkeit
-            TempList.add(jsonList.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
-            TempList.add(jsonList.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description"));
-            TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("temp")));
-            TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("feels_like")));
-            TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("humidity")));
-            TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("wind").getFloat("speed")));
+            weathernameList.add(jsonList.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
+            descriptionList.add(jsonList.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description"));
+            tempList.add(Integer.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("temp")));
+            tempfeelslikeList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("feels_like")));
+            humidityList.add((jsonList.getJSONObject(i).getJSONObject("main").getInt("humidity")));
+            windspeedList.add(Float.valueOf(jsonList.getJSONObject(i).getJSONObject("wind").getFloat("speed")));
+            dateList.add(jsonList.getJSONObject(i).getString("dt_txt"));
 
-            //System.out.println("Temp: " + temp_array[i] + " Feel: " + feeltemp_array[i] + " hum: " + humidity_array[i]);
-
-            /*emporäre Liste füllen
-            TempList.add(weather_array[i]);
-            TempList.add(description_array[i]);
-            TempList.add(String.valueOf(windspeed_array[i]));
-            TempList.add(String.valueOf(feeltemp_array[i]));
-            TempList.add(String.valueOf(feeltemp_array[i]));
-            TempList.add(String.valueOf(humidity_array[i]));
-             */
-
-            CityList = TempList;
-
-            System.out.println(CityList);
+            //for controlpurposes
+            System.out.println( city + " --- Temperature: " + tempList.get(i) + " -- Feelslike: " + tempfeelslikeList.get(i) +
+                    " -- Humidity: " + humidityList.get(i) + " -- Weathername: " + weathernameList.get(i)+
+                    " -- Description: " + descriptionList.get(i) + " -- Date: " + dateList.get(i));
         }
     }
-    public static List<String> getWeather(){
-        return CityList;
-    }
 
 
-    public static void ReadAPI(String city)
-    {
+
+
+    public static void ReadAPI(String city) {
             //Create the http Client
             HttpClient client = HttpClient.newHttpClient();
             //Build the http Request
@@ -101,12 +73,6 @@ public class City extends Main{
         JSONObject mainWeather = new JSONObject(responseBody);
         JSONArray array = mainWeather.getJSONArray("list");
         jsonList = array;
-
-
         return null;
-        }
-
-
-
-
+    }
 }

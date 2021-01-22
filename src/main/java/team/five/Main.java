@@ -382,7 +382,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(); City a = new City("Wien");
+        launch();
+        City a = new City("Vienna");
+        City b = new City("Linz");
+        City c = new City("Graz");
     }
 
 
