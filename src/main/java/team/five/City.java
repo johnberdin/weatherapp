@@ -55,7 +55,7 @@ public class City extends Main{
             TempList.clear();
             //Arraylist Stelle 1: Temperatur, Stelle 2: feels like, Stelle 3: Feuchtigkeit
             TempList.add(jsonList.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("main"));
-            TempList.add(jsonList.getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description"));
+            TempList.add(jsonList.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("description"));
             TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("temp")));
             TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("feels_like")));
             TempList.add(String.valueOf(jsonList.getJSONObject(i).getJSONObject("main").getInt("humidity")));
