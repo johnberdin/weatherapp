@@ -29,12 +29,13 @@
 
 #lblChosenCity{
     -fx-text-fill: WHITE;
-    -fx-font-family: "Champagne & Limousines";
-    -fx-font-size: 26px;
+    -fx-font-family: "Normafixed Tryout";
+    -fx-font-size: 29px;
 }
 
 #lblInformation{
     -fx-text-fill: WHITE;
-    -fx-font-family: "Champagne & Limousines";
-    -fx-font-size: 11px;
+    -fx-font-family: "Normafixed Tryout";
+    -fx-font-size: 13px;
 }
+

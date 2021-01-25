@@ -84,3 +84,9 @@
     -fx-font-family: "Champagne & Limousines";
     -fx-font-size: 35px;
 }
+
+#lblCountryname{
+    -fx-text-fill: WHITE;
+    -fx-font-family: "Champagne & Limousines";
+    -fx-font-size: 25px;
+}
