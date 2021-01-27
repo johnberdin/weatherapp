@@ -135,7 +135,7 @@ public class City extends Main{
 
     public String toString(){
         for(int i = 0; i<this.dateList.size(); i++){
-            System.out.println(this.dateList.get(i));
+            System.out.println(this.dateList.get(i)); 
         }
         return this.strCity + "-- current Temp.: "+ this.tempList.get(0)+ "-- Weather: "+this.weathernameList.get(0)+ "--Date: "+this.getDateList().get(0);
     }

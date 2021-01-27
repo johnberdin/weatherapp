@@ -39,32 +39,15 @@ public class Main extends Application {
      private Scene scene2;
      private Scene scene1;
      private ImageView countryImage;
-     //OLD  -- to display the name of the cities
-     private Label[] arrLabelCitynames = new Label[5];
-     //These String-variables will have to be filled with the name of the weather in each city
-     //ARE PREFILLED WITH CONTENT FOR TEST PURPOSES; should be filled in the switch-case after selection
-     //the positions of each city
-//     private Double dblViennaX = 813.0;
-//     private Double dblViennaY = 287.0;
-//     private Double dblLinzX = 595.0;
-//     private Double dblLinzY = 277.0;
-//     private Double dblGrazX = 700.0;
-//     private Double dblGrazY = 430.0;
-//     private Double dblKlagenfurtX = 590.0;
-//     private Double dblKlagenfurtY = 485.0;
-//     private Double dblInnsbruckX = 292.0;
-//     private Double dblInnsbruckY = 415.0;
      //new version
      private City[] cityArray = new City[5]; //instead of btnCity1-5
+     //arrays are used for the positioning of the cities to ease the placement
      private Double[] austriaXPos = {813.0, 595.0, 700.0, 590.0, 292.0};
      private Double[] austriaYPos = {287.0, 277.0, 430.0, 485.0, 415.0};
      private Double[] czechXPos = {400.0, 275.0, 600.0, 730.0, 675.0};
      private Double[] czechYPos = {310.0, 370.0, 480.0, 460.0, 340.0};
      private Double[] germanyXPos = {610.0, 464.0, 320.0, 420.0, 555.0};
      private Double[] germanyYPos = {235.0, 165.0, 330.0, 500.0, 548.0};
-     private String[] autCitynames = {"Vienna", "Linz", "Graz", "Klagenfurt", "Innsbruck"};
-     private String[] czCitynames = {"Prague", "Pilsen", "Brno", "Zlin", "Olomouc"};
-     private String[] deCitynames = {"Berlin", "Hamburg", "Cologne", "Stuttgart", "Munich"};
      private Pane paneScene2;
      private Button btnBackToScene1 = new Button(); //button to go back to scene1 (country selection)
      private Button btnCloseScene2 = new Button();
@@ -84,16 +67,8 @@ public class Main extends Application {
         cbCountry.getItems().add("Austria");
         cbCountry.getItems().add("Czech Republic");
         cbCountry.getItems().add("Germany");
-
         cbCountry.getSelectionModel().select(0); //The first possible option is set as default
-        //labels are initialized and adjusted
-//        for(int i = 0; i< arrLabelCitynames.length; i++){
-//            arrLabelCitynames[i] = new Label();
-//            arrLabelCitynames[i].setMinWidth(100);
-//            arrLabelCitynames[i].setAlignment(Pos.CENTER);
-//            arrLabelCitynames[i].setTextFill(Color.WHITE);
-//            arrLabelCitynames[i].setFont(new Font("Champagne & Limousines", 11));
-//        }
+
         System.out.println("---init code stops");
     }
 
@@ -106,16 +81,11 @@ public class Main extends Application {
         window.initStyle(StageStyle.TRANSPARENT);
         window.setResizable(false);
 
-        /**
-         * Setting the dimensions of the stage
-         */
+        //the size of the window is set
         window.setWidth(1000);
         window.setHeight(800);
 
-
-        /**
-         * scene1 is created
-         */
+        //scene 1 is created
         BorderPane lytScene1 = new BorderPane();
         lytScene1.setOnMousePressed(pressEvent -> {
             lytScene1.setOnMouseDragged(dragEvent -> {
@@ -148,12 +118,9 @@ public class Main extends Application {
         lytSelectAndConfirm.getChildren().addAll(new ImageView(new Image("AppIcon.png")), lytLabelAndDropdown, btnConfirmCountry);
         lytLabelAndDropdown.getChildren().addAll(lblSelectACountry, cbCountry);
 
-
-        /**
-         * scene2 is created
-         */
+        //scene 2 is created
         paneScene2 = new Pane(); //a  pane for elements will be used for scene2 to ease sizing and positioning
-        paneScene2.setOnMousePressed(pressEvent -> {
+        paneScene2.setOnMousePressed(pressEvent -> { //the window can be moved
             paneScene2.setOnMouseDragged(dragEvent -> {
                 primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
                 primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
@@ -163,11 +130,8 @@ public class Main extends Application {
         scene2.getStylesheets().add("/styleScene2.css");
         scene2.setFill(Color.TRANSPARENT);
         countryImage = new ImageView();
-        //the elements are added -- btnCity1-5, arrLabel... also are from the old version
 
-        /**
-         * Actions for the buttons are set here
-         */
+        //actions are added to the buttons
         btnBackToScene1.setOnAction(e -> window.setScene(scene1));
         btnCloseScene2.setOnAction(e -> window.close());
         btnCloseScene1.setOnAction(e -> window.close());
@@ -177,7 +141,7 @@ public class Main extends Application {
 
 
         /**
-         * Size and position of buttons nad labels in scene1 and 2, which are in Panes, are set
+         * Size and position of buttons and labels in scene1 and 2, which are in Panes, are set
          */
         lblApptitle.setLayoutX(50);
         lblApptitle.setLayoutY(50);
@@ -208,13 +172,16 @@ public class Main extends Application {
         window.show(); //The stage will show up.
     }
 
+
     //Events are created here
 
+    //event for popup
     EventHandler<ActionEvent> eventCityClicked = new EventHandler<ActionEvent>() {
         char degreeSymbol = 176;
         @Override
         public void handle(ActionEvent event) {
-            Button btnEventsource = (Button)event.getSource(); //Value of Button is taken, only Vienna returns a value for TEST PURPOSES
+            Button btnEventsource = (Button)event.getSource(); //this is needed to give the popup the title (name of city)
+            //each button has a city as userdata, so the popup can be dynamically changed according to the city
             City chosenCity = (City)btnEventsource.getUserData();
             System.out.println("This city has been clicked -> " + chosenCity);
             final Stage stgPopup = new Stage();
@@ -224,6 +191,7 @@ public class Main extends Application {
             stgPopup.initStyle(StageStyle.TRANSPARENT);
             stgPopup.initModality(Modality.APPLICATION_MODAL);
             Pane lytPopup = new Pane();
+            //the popup will be able to get dragged around
             lytPopup.setOnMousePressed(pressEvent -> {
                 lytPopup.setOnMouseDragged(dragEvent -> {
                     stgPopup.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
@@ -238,16 +206,19 @@ public class Main extends Application {
             btnClosePopup.setOnAction(e -> stgPopup.close());
             btnClosePopup.setLayoutX(250);
             btnClosePopup.setLayoutY(20);
+            //the title of the popup button is set, for the city-name
             Label lblChosenCity = new Label(btnEventsource.getText());
+            //the css-part is added to the label
             lblChosenCity.setId("lblChosenCity");
             lblChosenCity.setLayoutX(20);
             lblChosenCity.setLayoutY(50);
+            //the hours are always 3 hours apart
             String[] nextHours = new String[4];
             nextHours[0] = chosenCity.getDateList().get(1).substring(11,16);
             nextHours[1] = chosenCity.getDateList().get(2).substring(11,16);
             nextHours[2] = chosenCity.getDateList().get(3).substring(11,16);
             nextHours[3] = chosenCity.getDateList().get(4).substring(11,16);
-            //This label will have to be filled with the full detailed information
+            //This label shows the detailed information
             Label lblInformation = new Label(""+
                     "Temperature: "+chosenCity.getTempList().get(0)+ degreeSymbol + "C"    +System.lineSeparator()+
                     "Weather: " + chosenCity.getWeathernameList().get(0) +", "+ chosenCity.getDescriptionList().get(0)    +System.lineSeparator()+
@@ -265,13 +236,16 @@ public class Main extends Application {
             lblInformation.setId("lblInformation");
             lblInformation.setLayoutX(20);
             lblInformation.setLayoutY(95);
+            //the "window"-buttons (close,...) are added to the popup
             lytPopup.getChildren().addAll(lblInformation, lblChosenCity, btnClosePopup);
             stgPopup.setScene(scene1);
             stgPopup.show();
         }
     };
 
-
+    /**
+     * This is the "main"-Function
+     */
     EventHandler<ActionEvent> eventConfirmCountry = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -284,26 +258,37 @@ public class Main extends Application {
                     System.out.println("Austria has been selected.");
                     lblCountryname.setText("Austria");
                     ivCountryflag.setImage(imgAustriaflag);
+                    //the previous elements will get deleted/disconnected
                     paneScene2.getChildren().clear();
                     paneScene2.getChildren().addAll(ivCountryflag, lblCountryname, lblApptitle, btnMinimizeScene2, btnCloseScene2, btnBackToScene1, countryImage);
+                    //the array of the city-objects is now filled
                     cityArray[0] = new City("Vienna");
                     cityArray[1] = new City("Linz");
                     cityArray[2] = new City("Graz");
                     cityArray[3] = new City("Klagenfurt");
                     cityArray[4] = new City("Innsbruck");
+                    //the image of the country is set
                     countryImage.setImage(imgAustria);
                     countryImage.setFitHeight(540);
                     countryImage.setFitWidth(850);
                     countryImage.setX(75);
                     countryImage.setY(100);
+                    //loop through the city-Array-objs, the buttons and labels of the city-objs are added and placed
                     for(int i = 0; i< cityArray.length; i++){
+                        //the button and label, initialized in the city-obj, are added to the pane
                         paneScene2.getChildren().addAll(cityArray[i].getBtnCity(), cityArray[i].getLblCityname());
+                        //css-class is added to the buttons -> main reason: button should be invisible
                         cityArray[i].getBtnCity().getStyleClass().add("cityButtons");
+                        //the button of each city gets the event for the popup
                         cityArray[i].getBtnCity().setOnAction(eventCityClicked);
+                        //button is placed
                         cityArray[i].getBtnCity().setTranslateX(austriaXPos[i]);
                         cityArray[i].getBtnCity().setTranslateY(austriaYPos[i]);
+                        //the button of the city gets the right image of the weather, according to the weather(-name)
+                        //the method: selectWeatherImage
                         cityArray[i].getBtnCity().setGraphic(selectWeatherImage(cityArray[i].getWeathernameList().get(0)));
                         cityArray[i].getBtnCity().setTooltip(ttipOnCity);
+                        //label-city is placed
                         cityArray[i].getLblCityname().setTranslateX(austriaXPos[i] - 38);
                         cityArray[i].getLblCityname().setTranslateY(austriaYPos[i] + 23);
                     }
@@ -312,6 +297,7 @@ public class Main extends Application {
                     System.out.println("Czech Republic has been selected.");
                     lblCountryname.setText("Czech Republic");
                     ivCountryflag.setImage(imgCzechflag);
+                    //the previous elements will get deleted/disconnected
                     paneScene2.getChildren().clear();
                     paneScene2.getChildren().addAll(ivCountryflag, lblCountryname, lblApptitle, btnMinimizeScene2, btnCloseScene2, btnBackToScene1, countryImage);
                     countryImage.setImage(imgCzech);
@@ -319,6 +305,7 @@ public class Main extends Application {
                     countryImage.setFitWidth(800);
                     countryImage.setX(100);
                     countryImage.setY(100);
+                    //the array of the city-objects is now filled
                     cityArray[0] = new City("Prague");
                     cityArray[1] = new City("Pilsen");
                     cityArray[2] = new City("Brno");
@@ -347,6 +334,7 @@ public class Main extends Application {
                     countryImage.setY(50);
                     paneScene2.getChildren().clear();
                     paneScene2.getChildren().addAll(ivCountryflag, lblCountryname, lblApptitle, btnMinimizeScene2, btnCloseScene2, btnBackToScene1, countryImage);
+                    //the array of the city-objects is now filled
                     cityArray[0] = new City("Berlin");
                     cityArray[1] = new City("Hamburg");
                     cityArray[2] = new City("Cologne");
@@ -411,10 +399,12 @@ public class Main extends Application {
         return ivWeather;
     }
 
+    //the given string will get padded to the given size on the left side
     public static String padLeft(String s, int n) {
         return String.format("%" + n + "s", s);
     }
 
+    //main
     public static void main(String[] args) {
         launch();
     }
